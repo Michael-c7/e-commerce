@@ -9,7 +9,78 @@
 </head>
 <body>
     <div class="app">
-        <div>hello world</div>
+        <header class="app__header">
+            <button class="header__filter-search">
+                <div>filter icon</div>
+                <div>filter content here</div>
+            </button>
+
+            <form class="search-bar">
+                <input class="search-bar__input" type="text" placeholder="Enter a City" aria-label="search"/>
+                <button class="search-bar__submit" aria-label="submit search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+
+            <div class="header__cart">
+                <div class="cart-amt">3</div>
+                <div class="cart-icon">cart icon here</div>
+
+                <section class="user-cart">
+                    <header class="cart__header">
+                        <h2>My Cart</h2>
+                        <div class="cart-total-price">$145</div>
+                    </header>
+
+                    <ul class="cart-items">
+                        <li class="cart-item">
+                            <img src="/" alt="cart item img">
+                            <div>
+                                <div class="cart-item-name">white t-shirt</div>
+                                <div class="cart-item-price">$57.67</div>
+                            </div>
+                            <div class="item__amt">
+                                <button class="item__amt__decrease-amt">down btn</button>
+                                <div class="item__amt__amt">1</div>
+                                <button class="item__amt__increase-amt">up btn</button>
+                            </div>
+                            <button class="cart-item__delete-item">&times;</button>
+                        </li>
+                    </ul>
+
+                    <button class="cart-pay-now">PAY NOW</button>
+                </section>
+            </div>
+        </header>
+
+        <section class="app__body">
+            <div class="filter-section">
+                <div>filter content here</div>
+            </div>
+
+            <div>
+                <div class="slider-show-section">
+                    <div>slideshow-stuff-here</div>
+                </div>
+
+                <ul class="product-content">
+                    <li class="product-content__item">
+                        <img src="/" alt="item img">
+                        <div class="item-name">yellow watch</div>
+                        <div class="item-price">$222</div>
+                        <p class="product-content__description">
+                            Lorem ipsum dolor sit amet consectetur,
+                            adipisicing elit. Obcaecati voluptas odit iste laboriosam.
+                            aboriosam rem asperiores minima laudantium dolore ipsum.
+                        </p>
+
+                        <button class="item__add-to-cart">Add to Cart</button>
+
+                    </li>
+                </ul>
+            </div>
+
+        </section>
     </div>
 </body>
 
