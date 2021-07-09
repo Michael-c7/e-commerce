@@ -1,0 +1,18 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+}
+
+
+ul {
+    list-style-type: none;
+  }
+
+body {
+    background-color:#ecf0f1;
+    color:#000;
+    font-family: 'Fira Sans', sans-serif;
+  }
