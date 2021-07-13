@@ -22,6 +22,25 @@ let test = async _ => {
 // test()
 
 
+
+
+
+// toggle mobile nav
+const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
+const navbarLinks = document.querySelector(".navbar-links");
+let height = navbarLinks.scrollHeight;
+/*allows it to transition from 0 to auto smoothly */
+navbarLinks.style.setProperty('--max-height', height + 'px');
+
+const toggleMobileNavMenu = _ => {
+    navbarLinks.classList.toggle("navbar-links--active");
+}
+
+navbarToggleBtnEl.addEventListener("click", toggleMobileNavMenu);
+
+
+
+
 /*
 <button class="header__filter-search">
                 <i class="fa fa-sort" aria-hidden="true"></i>
