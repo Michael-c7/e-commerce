@@ -9,92 +9,55 @@
 </head>
 <body>
     <div class="app">
-        <header class="app__header">
-            <button class="header__filter-search">
-                <i class="fa fa-sort" aria-hidden="true"></i>
-
-                <div class="filter-content">
-                    <button class="filter-content__clear-filter">Clear Filter</button>
-
-                    <div class="filter-content__products">
-                        <div>
-                            <button class="filter-content__products-btn">
-                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                            </button>
-                            <div>Product type</div>
-                        </div>
-                        <form action="">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> I have a bike</label>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> I have a car</label>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> I have a boat</label>
-                        </form>
-                    </div>
-
-                    <div class="filter-content__price">
-                        <div>
-                            <button class="filter-content__price-btn">
-                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                            </button>
-                            <div>Price type</div>
-                        </div>
-                        <form action="">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> I have a bike</label>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> I have a car</label>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> I have a boat</label>
-                        </form>
-                    </div>
-                </div>
-            </button>
-
-            <form class="search-bar">
-                <input class="search-bar__input" type="text" placeholder="Enter a product" aria-label="search"/>
-                <button class="search-bar__submit" aria-label="submit search">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-
-            <div class="header__cart">
-                <div class="cart-amt">3</div>
-                <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
-                <section class="user-cart">
-                    <header class="cart__header">
-                        <h2>My Cart</h2>
-                        <div class="cart-total-price">$145</div>
-                    </header>
-
-                    <ul class="cart-items">
-                        <li class="cart-item">
-                            <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="cart item img">
-                            <div>
-                                <div class="cart-item-name">white t-shirt</div>
-                                <div class="cart-item-price">$57.67</div>
-                            </div>
-                            <div class="item__amt">
-                                <button class="item__amt__decrease-amt">
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                </button>
-                                <div class="item__amt__amt">1</div>
-                                <button class="item__amt__increase-amt">
-                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            <button class="cart-item__delete-item">&times;</button>
-                        </li>
-                    </ul>
-
-                    <button class="cart-pay-now">PAY NOW</button>
-                </section>
+        <!-- <nav class="app__navbar">
+            <div class="navbar__info">
+                <button class="navbar__bars-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                <ul>
+                    <li class="navbar__item-links"><a href="#">Home</a></li>
+                    <li class="navbar__item-links"><a href="#">About</a></li>
+                </ul>
             </div>
-        </header>
+
+            <div class="navbar__utility">
+                <ul>
+                    <li class="navbar__item-search-bar">
+                        <form class="search-bar">
+                            <input class="search-bar__input" type="text" placeholder="Enter a product" aria-label="search"/>
+                            <button class="search-bar__submit" aria-label="submit search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+
+                    <li>
+                        <button class="navbar__item-cart">
+                            <div class="navbar__item-cart__amt">
+                                <div>4</div>
+                            </div>
+                            <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav> -->
+        <nav class="navbar">
+            <div class="brand-title">brand name</div>
+            <button class="navbar__toggle-btn">
+                <span class="navbar__toggle-btn__bar"></span>
+                <span class="navbar__toggle-btn__bar"></span>
+                <span class="navbar__toggle-btn__bar"></span>
+            </button>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
 
         <section class="app__body">
-            <div class="filter-section">
                 <div class="filter-content">
                     <button class="filter-content__clear-filter">Clear Filter</button>
 
@@ -132,7 +95,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
 
             <div>
                 <div class="slider-show-section">
@@ -142,7 +104,7 @@
                 <ul class="product-content">
                     <li class="product-content__item">
                         <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="item img">
-                        <div class="item-name">yellow watch</div>
+                        <div class="item-name">blue bag</div>
                         <div class="item-price">$222</div>
                         <p class="product-content__description">
                             Lorem ipsum dolor sit amet consectetur,
