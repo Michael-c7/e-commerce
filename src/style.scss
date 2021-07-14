@@ -30,7 +30,7 @@ red : #eb3b5a
 .app {
     position: relative;
     background:#efefef;
-    width:100vw;
+    // width:100vw;
     height: 100vh;
 }
 
@@ -45,6 +45,10 @@ red : #eb3b5a
     align-items:center;
     background:#333;
     color:#fff;
+    z-index:100;
+
+    position:sticky;
+    top:0;
 }
 
 .brand-title {
@@ -172,9 +176,10 @@ red : #eb3b5a
 /*main content body*/
 .app__body {
     display:grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 150px minmax(400px, 800px);
     padding:1.75rem 1rem 0rem 1rem;
     background:rgba(0, 0, 255, 0.137);
+    justify-content: center;
 }
 
 .filter-content {
@@ -231,16 +236,19 @@ red : #eb3b5a
 
 .body__main-content {
     position: relative;
-    display:grid;
-    grid-template-rows: 1fr 2fr;
 }
 
+.body__main-content__inner {
+    position: relative;
+    display:grid;
+    grid-template-rows: 1fr 3fr;
+}
 
 
 
 .slider {
     position: relative;
-    background:rgba(255, 0, 0, 0.349);
+    // background:rgba(255, 0, 0, 0.349);
     // overflow:hidden;
 }
 
@@ -264,12 +272,12 @@ red : #eb3b5a
 
 .slide__btn-previous {
     left:0;
-    z-index:100;
+    z-index:25;
 }
 
 .slide__btn-next {
     right:0;
-    z-index:100;
+    z-index:25;
 }
 
 .slider__img {
@@ -300,18 +308,26 @@ red : #eb3b5a
 
 /*shop stuff*/
 
+.product-content-container {
+    position: relative;
+}
+
 .product-content {
     position: relative;
-    background:red;
-    display:flex;
-    // flex-direction: column;
+    background-color:#efefef;
+    // display:flex;
+    // flex-direction: row;
     // flex-wrap: wrap;
+
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .product-content__item {
     background:#fff;
     display:grid;
-    
+    padding:1rem;
+    margin:1rem;
 }
 
 .product-content__item__info {
@@ -319,6 +335,25 @@ red : #eb3b5a
     flex-direction: column;
     align-items: center;
     padding:0 0.5rem;
+
+    h2 {
+        font-weight: 400;
+    }
+}
+
+.content__item__img {
+    // background:red;
+    // padding:1rem;
+    max-width:100%;
+    width:200px;
+    height:200px;
+    margin:0 auto;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.product-content__item__info {
+    margin:0.75rem 0;
 }
 
 .product-content__description {
@@ -330,9 +365,21 @@ red : #eb3b5a
     background:var(--main-blue);
     color:#fff;
     font-size: 1rem;
+    margin:1rem 0;
     padding:0.5rem 1rem;
     width:80%;
     left:50%;
     transform:translateX(-50%);
     border-radius: 3px;
+    transition: opacity 0.1s ease;
+}
+
+.item__add-to-cart:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.item__add-to-cart:active {
+    opacity: 1;
+    cursor: pointer;
 }
