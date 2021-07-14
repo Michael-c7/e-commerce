@@ -1,4 +1,14 @@
 import './style.scss';
+import sliderImg0 from "./images/slider-img-electronics-0.jpg"
+
+/*
+w/ webpack have to add image w/ js | or css
+EG
+import Icon from './icon.png';
+---
+https://webpack.js.org/guides/asset-management/#loading-images
+*/
+
 /*
 https://fakestoreapi.com/
 
@@ -29,7 +39,7 @@ let test = async _ => {
 const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
 const navbarLinks = document.querySelector(".navbar-links");
 let height = navbarLinks.scrollHeight;
-/*allows it to transition from 0 to auto smoothly */
+/*allows it to transition from 0 to auto smoothly*/
 navbarLinks.style.setProperty('--max-height', height + 'px');
 
 const toggleMobileNavMenu = _ => {
@@ -38,6 +48,31 @@ const toggleMobileNavMenu = _ => {
 
 navbarToggleBtnEl.addEventListener("click", toggleMobileNavMenu);
 
+
+
+
+
+// img slider
+let imgSliderEl = document.querySelector(".slider__img");
+// imgSliderEl.style.src = sliderImg0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// toggle filter open
+// const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
 
 
 
