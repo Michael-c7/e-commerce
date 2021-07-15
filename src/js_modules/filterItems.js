@@ -9,3 +9,7 @@ const getCategories = async _ => {
         console.log(err);
     }
 }
+
+
+
+// const categories = await getCategories();

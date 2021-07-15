@@ -1,7 +1,7 @@
 import './style.scss';
 import sliderImg0 from "./images/slider-img-electronics-0.jpg";
-import { myTestFunc } from "./js_modules/productItems";
 import {toggleMobileNavMenu } from "./js_modules/toggleMobileNav";
+import { searchProducts } from "./js_modules/search";
 
 /*
 w/ webpack have to add image w/ js | or css
@@ -16,7 +16,15 @@ https://fakestoreapi.com/
 
 https://apilist.fun/category/ecommerce
 */
-myTestFunc()
+
+const render = _ => {
+    // productItem()
+    searchProducts()
+}
+
+render()
+
+
 
 let test = async _ => {
     let endPoint = "https://fakestoreapi.com/products/categories";

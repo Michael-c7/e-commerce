@@ -1,7 +1,7 @@
 const productContentEl = document.querySelector(".product-content");
 
-export const myTestFunc = async _ => {
-    productItemDataRender()
+export const productItem = async _ => {
+    render()
     console.log('the product items module');
 }
 
@@ -21,11 +21,11 @@ const productItemData = async _ => {
 
 const productItemDataRender = async _ => {
     const productData = await productItemData();
-    console.log(productData)
-    // max characters 155 or max words 20
     let myMarkup = "";
+
     productData.forEach((item, index) => {
         const { category, description, image, price, title } = item;
+        // max characters 155 or max words 20
         let amtOfLettersToKeep = 155;
         let shortenedDescription = description.substring(0, amtOfLettersToKeep).replace(/\s*$/,"") + "...";
 
@@ -49,7 +49,7 @@ const productItemDataRender = async _ => {
 
 
 const render = _ => {
-
+    productItemDataRender()
 }
 
 
