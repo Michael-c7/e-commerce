@@ -58,65 +58,24 @@ let imgSliderEl = document.querySelector(".slider__img");
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // toggle filter open
 // const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
 
 
 
-/*
-<button class="header__filter-search">
-                <i class="fa fa-sort" aria-hidden="true"></i>
+/*TODO LIST
+1. add the data from the fake store api
+- https://fakestoreapi.com/docs
 
-                <div class="filter-content">
-                    <button class="filter-content__clear-filter">Clear Filter</button>
+2. get search functionality working
 
-                    <div class="filter-content__products">
-                        <div>
-                            <button class="filter-content__products-btn">
-                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                            </button>
-                            <div>Product type</div>
-                        </div>
-                        <form action="">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> I have a bike</label>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> I have a car</label>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> I have a boat</label>
-                        </form>
-                    </div>
+3. create a working slidershow
+    - auto / timed scroll
+    - can scroll(based of index) / fade scroll
 
-                    <div class="filter-content__price">
-                        <div>
-                            <button class="filter-content__price-btn">
-                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                            </button>
-                            <div>Price type</div>
-                        </div>
-                        <form action="">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> I have a bike</label>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> I have a car</label>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> I have a boat</label>
-                        </form>
-                    </div>
-                </div>
-            </button>
+4. add to cart
 
+5. cart functionality
+
+6. filter products functionality
 */
