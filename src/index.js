@@ -1,5 +1,7 @@
 import './style.scss';
-import sliderImg0 from "./images/slider-img-electronics-0.jpg"
+import sliderImg0 from "./images/slider-img-electronics-0.jpg";
+import { myTestFunc } from "./js_modules/productItems";
+import {toggleMobileNavMenu } from "./js_modules/toggleMobileNav";
 
 /*
 w/ webpack have to add image w/ js | or css
@@ -14,7 +16,7 @@ https://fakestoreapi.com/
 
 https://apilist.fun/category/ecommerce
 */
-
+myTestFunc()
 
 let test = async _ => {
     let endPoint = "https://fakestoreapi.com/products/categories";
@@ -30,23 +32,6 @@ let test = async _ => {
 }
 
 // test()
-
-
-
-
-
-// toggle mobile nav
-const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
-const navbarLinks = document.querySelector(".navbar-links");
-let height = navbarLinks.scrollHeight;
-/*allows it to transition from 0 to auto smoothly*/
-navbarLinks.style.setProperty('--max-height', height + 'px');
-
-const toggleMobileNavMenu = _ => {
-    navbarLinks.classList.toggle("navbar-links--active");
-}
-
-navbarToggleBtnEl.addEventListener("click", toggleMobileNavMenu);
 
 
 
