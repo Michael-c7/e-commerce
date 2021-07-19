@@ -20,8 +20,16 @@ const closeCart = _ => {
 
 
 export const cartModule = _ => {
-    console.log("the cart module")
+    console.log("the cart module");
 
     cartIconNavbarEl.addEventListener("click", openCart);
     closeCartBtnEl.addEventListener("click", closeCart);
+
+    // the cart top is the current amount of pixels scrolled
+    const runOnScroll = _ => {
+        cartContainer.style.top = `${window.pageYOffset}px`;
+    }
+    window.addEventListener("scroll", runOnScroll, {passive:true});
 }
+
+
