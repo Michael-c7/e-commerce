@@ -19,8 +19,17 @@ const productItemData = async _ => {
 }
 
 
+
 const productItemDataRender = async _ => {
     const productData = await productItemData();
+    let productDataFilter = productData.filter(product => {
+        const { title } = product;
+        // case sensitive
+        if(title.toLowerCase().split(" ").includes("mens")) {
+            // console.log(title)
+        }
+    });
+
     let myMarkup = "";
 
     productData.forEach((item, index) => {

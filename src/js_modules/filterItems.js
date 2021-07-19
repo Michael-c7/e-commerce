@@ -11,5 +11,6 @@ const getCategories = async _ => {
 }
 
 
-
-// const categories = await getCategories();
+export const filterItem = _ => {
+    // console.log("filter item here");
+}
