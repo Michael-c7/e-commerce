@@ -62,7 +62,7 @@ export const changeSliderImg = _ => {
     // previous slide
     previousBtn.addEventListener("click", changeSlidePrev);
 
-    // initiate auto slide
+    // initiate the auto slide
     window.onload = changeSlideAuto;
 
 

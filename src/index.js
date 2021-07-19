@@ -2,6 +2,7 @@ import './style.scss';
 import sliderImg0 from "./images/slider-img-electronics-0.jpg";
 import {toggleMobileNavMenu } from "./js_modules/toggleMobileNav";
 import { searchProducts } from "./js_modules/search";
+import { cartModule } from "./js_modules/cart";
 
 /*
 w/ webpack have to add image w/ js | or css
@@ -20,6 +21,7 @@ https://apilist.fun/category/ecommerce
 const render = _ => {
     // productItem()
     searchProducts()
+    cartModule()
 }
 
 render()
