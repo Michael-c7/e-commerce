@@ -195,6 +195,11 @@ red : #eb3b5a
     font-size:1rem;
 }
 
+.filter-content__clear-filter:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .filter-content__btn {
     position: relative;
     display:flex;

@@ -33,14 +33,14 @@ const productItemDataRender = async _ => {
     let myMarkup = "";
 
     productData.forEach((item, index) => {
-        const { category, description, image, price, title } = item;
+        const { id, category, description, image, price, title } = item;
         // max characters 155 or max words 20
         let amtOfLettersToKeep = 155;
         let shortenedDescription = description.substring(0, amtOfLettersToKeep).replace(/\s*$/,"") + "...";
 
         let markup = `
-        <li class="product-content__item" data-category="${category}">
-            <img class="content__item__img" src="${image}" alt="item image">
+        <li class="product-content__item" data-category="${category} "data-productId="${id}">
+            <img class="content__item__img" src="${image}" alt="${title} image">
             <div class="product-content__item__info">
                 <h2 class="item-name">${title}</h2>
                 <h3 class="item-price">$${price}</h3>
@@ -60,6 +60,8 @@ const productItemDataRender = async _ => {
 const render = _ => {
     productItemDataRender()
 }
+
+
 
 
 /*
