@@ -617,3 +617,12 @@ red : #eb3b5a
     display:grid;
     z-index:200;
 }
+
+
+// cart mobile
+@media(max-width:800px) {
+    .cart {
+        width:90%;
+        height: 90%;
+    }
+}

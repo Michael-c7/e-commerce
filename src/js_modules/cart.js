@@ -6,6 +6,8 @@ const cartEl = document.querySelector(".cart");
 const closeCartBtnEl = document.querySelector(".close-cart-btn");
 let totalCostEl = document.querySelector(".total-price");
 let cartNavbarAmt = document.querySelector(".navbar__item-cart__amt");
+const cartItemsEl = document.querySelector(".cart__contents").children[0];
+
 
 const productContentEl = document.querySelector(".product-content");
 
@@ -25,8 +27,9 @@ productContentEl.addEventListener("click", event => {
         let itemId = Number(closestBtn.parentElement.getAttribute("data-productId"));
         let itemName = closestBtn.parentElement.children[1].children[0].innerHTML;
         let itemPrice = closestBtn.parentElement.children[1].children[1].innerHTML;
+        let itemImg = closestBtn.parentElement.children[0].src;
 
-        let data = {itemId, itemName, itemPrice, amountOfItem:1};
+        let data = {itemId, itemName, itemPrice, itemImg, amountOfItem:1};
         productDataToCart = data;
     }
 
@@ -34,17 +37,16 @@ productContentEl.addEventListener("click", event => {
     /*check if the item your currently adding is
     the same as an item thats already been added*/
     cart.forEach((product) => {
-        // if the products the same
         if(productDataToCart.itemId == product.itemId) {
             productDataToCart.amountOfItem++;
-        } else {
-            // if the products diffrent
         }
     });
     cart.push(productDataToCart);
 
 
-    const removeDuplicates = _ => {
+
+
+    const removeDuplicates = (arrayToFilter, propToFilterBy) => {
         // Declare a new array
         let newArray = [];
 
@@ -52,12 +54,12 @@ productContentEl.addEventListener("click", event => {
         let uniqueObject = {};
 
         // Loop for the array elements
-        for (var i in cart) {
+        for (var i in arrayToFilter) {
             // Extract the title
-            let objTitle = cart[i]['itemName'];
+            let objTitle = arrayToFilter[i][propToFilterBy];
 
             // Use the title as the index
-            uniqueObject[objTitle] = cart[i];
+            uniqueObject[objTitle] = arrayToFilter[i];
         }
 
         // Loop to push unique object into array
@@ -67,14 +69,91 @@ productContentEl.addEventListener("click", event => {
 
         // Display the unique objects
         console.log(newArray);
+        cart = newArray
     }
 
 
-    if(cart.length > 1) {
-        removeDuplicates()
+
+
+
+    const removeDuplicatesInCart = _ => {
+        // Declare a new array
+        let newArray = [];
+
+        // Declare an empty object
+        let uniqueObject = {};
+
+        // Loop for the array elements
+        for (var i in document.querySelectorAll(".cart-item")) {
+            // Extract the title
+            // let objTitle = document.querySelectorAll(".cart-item")[i].children[2].children[0].innerHTML;
+            // console.log(document.querySelectorAll(".cart-item")[i].children)
+            // Use the title as the index
+            // uniqueObject[objTitle] = document.querySelectorAll(".cart-item")[i];
+        }
+
+        // Loop to push unique object into array
+        // for (i in uniqueObject) {
+        //     newArray.push(uniqueObject[i]);
+        // }
+
+        // Display the unique objects
+        // console.log(newArray);
     }
 
-    // console.log(cart)
+
+    const renderCart = _ => {
+        let cartMarkup = "";
+        // render the cart data into the cart
+        cart.forEach(cartItem => {
+            const {amountOfItem, itemId, itemName, itemImg, itemPrice} = cartItem;
+            // console.log(itemName)
+
+            let markup = `
+            <li class="cart-item" "data-productId="${itemId}">
+                <button class="delete-cart-item-btn">
+                    <span>&times;</span>
+                </button>
+                <img src="${itemImg}" alt="${itemName}">
+                <div class="cart-item__info">
+                    <h3>${itemName}</h3>
+                    <div>${itemPrice}</div>
+                </div>
+                <div class="amount-container">
+                    <button class="cart-amt-btn cart-amt-btn__decrease"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                    <div class="amount-container__amt">${amountOfItem}</div>
+                    <button class="cart-amt-btn cart-amt-btn__increase"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+                </div>
+            </li>
+            `
+            cartMarkup += markup;
+        });
+        cartItemsEl.innerHTML = cartMarkup;
+
+        // remove the duplicates when in cart
+        if(document.querySelectorAll(".cart-item").length > 1) {
+            removeDuplicatesInCart()
+        }
+        
+        // nodelist[currentItem].itemName
+        // console.log(document.querySelectorAll(".cart-item")[0].children[2].children[0].innerHTML)
+
+
+
+    }
+
+
+    const setCart = _ => {
+        if(cart.length > 1) {
+            removeDuplicates(cart,"itemName")
+        }
+
+        renderCart()
+    }
+
+    setCart()
+
+    updateCartAmtNavbar()
 });
 
 
@@ -102,6 +181,13 @@ const updateCart = (cartData) => {
 }
 
 
+const updateCartAmtNavbar = _ => {
+    totalNavbarAmt = document.querySelectorAll(".cart-item").length;
+    cartNavbarAmt.innerHTML = totalNavbarAmt;
+}
+
+
+
 export const cartModule = _ => {
     console.log("the cart module");
 
@@ -119,27 +205,5 @@ export const cartModule = _ => {
 
 
 
-    //
     updateCart()
 }
-
-
-
-
-/*
-<li class="cart-item">
-    <button class="delete-cart-item-btn">
-        <span>&times;</span>
-    </button>
-    <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="">
-    <div class="cart-item__info">
-        <h3>Blue bag</h3>
-        <div>$33.32</div>
-    </div>
-    <div class="amount-container">
-        <button class="cart-amt-btn cart-amt-btn__decrease"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
-        <div class="amount-container__amt">1</div>
-        <button class="cart-amt-btn cart-amt-btn__increase"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
-    </div>
-</li>
-*/
