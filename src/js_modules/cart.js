@@ -44,9 +44,7 @@ productContentEl.addEventListener("click", event => {
     cart.push(productDataToCart);
 
 
-    function removeDuplicates() {
-        // https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
-
+    const removeDuplicates = _ => {
         // Declare a new array
         let newArray = [];
 
@@ -54,9 +52,9 @@ productContentEl.addEventListener("click", event => {
         let uniqueObject = {};
 
         // Loop for the array elements
-        for (let i in cart) {
+        for (var i in cart) {
             // Extract the title
-            objTitle = cart[i]['itemName'];
+            let objTitle = cart[i]['itemName'];
 
             // Use the title as the index
             uniqueObject[objTitle] = cart[i];
@@ -71,11 +69,12 @@ productContentEl.addEventListener("click", event => {
         console.log(newArray);
     }
 
+
     if(cart.length > 1) {
         removeDuplicates()
     }
 
-    console.log(cart)
+    // console.log(cart)
 });
 
 
