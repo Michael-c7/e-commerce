@@ -110,7 +110,7 @@ productContentEl.addEventListener("click", event => {
     calculateCartTotal()
     updateCartAmtNavbar()
 
-
+    increaseDecreaseCartBtnFunctionality()
 });
 
 
@@ -150,7 +150,7 @@ const calculateCartTotal = _ => {
     let nums = Array.from(document.querySelectorAll(".cart-item")).map(item =>
         item.children[2].children[1].innerHTML.slice(1) * item.children[3].children[1].innerHTML);
 
-    let totalAmt = nums.reduce((prev, curr)=> prev + curr);
+    let totalAmt = nums.reduce((prev, curr) => prev + curr);
 
     // render the total cost to the DOM
     totalCost = totalAmt;
@@ -159,6 +159,36 @@ const calculateCartTotal = _ => {
     to do any math w/ the total in the future*/
     totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
 }
+const deleteCartItemFunctionality = _ => {
+    //  console.log(Array.from(document.querySelectorAll(".cart-item")))
+
+    // 1. get the current item, current price & current amt
+    // 2. (get current price * current amt) & minus this from the total
+    // 3. remove item from cart array & remove it from the DOM
+}
+
+const increaseDecreaseCartBtnFunctionality = _ => {
+    // console.log(document.querySelectorAll(".cart__contents")[0].children[0])
+    // cart contents
+    document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
+        let btn = event.target.closest("button");
+        // decrease button
+        if(btn.classList.contains("cart-amt-btn__decrease")) {
+            // decrease score -1, run calc total function
+            // if score 0 remove item run deleteCartItemFunctionality function
+            console.log(event.target)
+        }
+
+        // increase button
+        if(btn.classList.contains("cart-amt-btn__increase")) {
+            // add score +1, run calc total function
+            console.log(event.target)
+        }
+    })
+}
+
+
+
 
 
 
