@@ -72,7 +72,7 @@ productContentEl.addEventListener("click", event => {
             // console.log(itemName)
 
             let markup = `
-            <li class="cart-item" "data-productId="${itemId}">
+            <li class="cart-item" data-productId="${itemId}">
                 <button class="delete-cart-item-btn">
                     <span>&times;</span>
                 </button>
@@ -148,6 +148,7 @@ const calculateCartTotal = _ => {
     // get all the prices & amt
     // console.log(Array.from(document.querySelectorAll(".cart-item")))
     let nums = Array.from(document.querySelectorAll(".cart-item")).map(item =>
+        // price * amount
         item.children[2].children[1].innerHTML.slice(1) * item.children[3].children[1].innerHTML);
 
     let totalAmt = nums.reduce((prev, curr) => prev + curr);
@@ -160,29 +161,77 @@ const calculateCartTotal = _ => {
     totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
 }
 const deleteCartItemFunctionality = _ => {
-    //  console.log(Array.from(document.querySelectorAll(".cart-item")))
-
     // 1. get the current item, current price & current amt
     // 2. (get current price * current amt) & minus this from the total
     // 3. remove item from cart array & remove it from the DOM
+
+    // console.log(Array.from(document.querySelectorAll(".cart-item")))
+    // console.log(event.target)
+
+    document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
+        let btn = event.target.closest("button");
+        let productId = event.target.parentElement.parentElement.parentElement.getAttribute("data-productId");
+        let productCost = Number(event.target.parentElement.parentElement.children[2].children[1].innerHTML.slice(1));
+        let productAmt = Number(event.target.parentElement.parentElement.children[3].children[1].innerHTML);
+        let productTotalAmt = productCost * productAmt;
+
+        if(btn.classList.contains("delete-cart-item-btn")) {
+            // decrease total amt
+            totalCostEl.innerHTML = `$${((productTotalAmt - totalCost).toFixed(2))}`;
+            // remove from cart
+            cart.forEach((currentProduct) => {
+                if(productId == currentProduct.itemId) {
+                    currentProduct.splice(productId, 1);
+                    // recalculate the total amount
+                    calculateCartTotal()
+                }
+            });
+            console.log()
+        }
+    });
+
+
 }
+
+
+deleteCartItemFunctionality()
+
+
+// console.log(document.querySelectorAll(".cart__contents")[0].children[0])
+
 
 const increaseDecreaseCartBtnFunctionality = _ => {
     // console.log(document.querySelectorAll(".cart__contents")[0].children[0])
     // cart contents
     document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
         let btn = event.target.closest("button");
+        let productId = event.target.parentElement.parentElement.parentElement.getAttribute("data-productId");
+
         // decrease button
         if(btn.classList.contains("cart-amt-btn__decrease")) {
-            // decrease score -1, run calc total function
-            // if score 0 remove item run deleteCartItemFunctionality function
-            console.log(event.target)
+            cart.forEach((currentProduct) => {
+                if(productId == currentProduct.itemId) {
+                    if(currentProduct.amountOfItem <= 1) {
+                        // deleteCartItemFunctionality()
+                        calculateCartTotal()
+                    } else {
+                        currentProduct.amountOfItem--;
+                        // recalculate the total amount
+                        calculateCartTotal()
+                    }
+                }
+            });
         }
 
         // increase button
         if(btn.classList.contains("cart-amt-btn__increase")) {
-            // add score +1, run calc total function
-            console.log(event.target)
+            cart.forEach((currentProduct) => {
+                if(productId == currentProduct.itemId) {
+                    currentProduct.amountOfItem++;
+                    // recalculate the total amount
+                    calculateCartTotal()
+                }
+            });
         }
     })
 }
