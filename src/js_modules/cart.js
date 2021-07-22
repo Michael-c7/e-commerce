@@ -32,15 +32,6 @@ productContentEl.addEventListener("click", event => {
         let data = {itemId, itemName, itemPrice, itemImg, amountOfItem:1};
         productDataToCart = data;
     }
-
-
-    /*check if the item your currently adding is
-    the same as an item thats already been added*/
-    cart.forEach((product) => {
-        if(productDataToCart.itemId == product.itemId) {
-            productDataToCart.amountOfItem++;
-        }
-    });
     cart.push(productDataToCart);
 
 
@@ -68,37 +59,8 @@ productContentEl.addEventListener("click", event => {
         }
 
         // Display the unique objects
-        console.log(newArray);
-        cart = newArray
-    }
-
-
-
-
-
-    const removeDuplicatesInCart = _ => {
-        // Declare a new array
-        let newArray = [];
-
-        // Declare an empty object
-        let uniqueObject = {};
-
-        // Loop for the array elements
-        for (var i in document.querySelectorAll(".cart-item")) {
-            // Extract the title
-            // let objTitle = document.querySelectorAll(".cart-item")[i].children[2].children[0].innerHTML;
-            // console.log(document.querySelectorAll(".cart-item")[i].children)
-            // Use the title as the index
-            // uniqueObject[objTitle] = document.querySelectorAll(".cart-item")[i];
-        }
-
-        // Loop to push unique object into array
-        // for (i in uniqueObject) {
-        //     newArray.push(uniqueObject[i]);
-        // }
-
-        // Display the unique objects
         // console.log(newArray);
+        cart = newArray;
     }
 
 
@@ -130,30 +92,25 @@ productContentEl.addEventListener("click", event => {
         });
         cartItemsEl.innerHTML = cartMarkup;
 
-        // remove the duplicates when in cart
-        if(document.querySelectorAll(".cart-item").length > 1) {
-            removeDuplicatesInCart()
-        }
-        
         // nodelist[currentItem].itemName
         // console.log(document.querySelectorAll(".cart-item")[0].children[2].children[0].innerHTML)
-
-
 
     }
 
 
     const setCart = _ => {
-        if(cart.length > 1) {
-            removeDuplicates(cart,"itemName")
-        }
+        removeDuplicates(cart, "itemName")
 
         renderCart()
     }
 
-    setCart()
 
+    // render
+    setCart()
+    calculateCartTotal()
     updateCartAmtNavbar()
+
+
 });
 
 
@@ -184,6 +141,23 @@ const updateCart = (cartData) => {
 const updateCartAmtNavbar = _ => {
     totalNavbarAmt = document.querySelectorAll(".cart-item").length;
     cartNavbarAmt.innerHTML = totalNavbarAmt;
+}
+
+
+const calculateCartTotal = _ => {
+    // get all the prices & amt
+    // console.log(Array.from(document.querySelectorAll(".cart-item")))
+    let nums = Array.from(document.querySelectorAll(".cart-item")).map(item =>
+        item.children[2].children[1].innerHTML.slice(1) * item.children[3].children[1].innerHTML);
+
+    let totalAmt = nums.reduce((prev, curr)=> prev + curr);
+
+    // render the total cost to the DOM
+    totalCost = totalAmt;
+    /*totalCost in () because toFixed convert the totalCost to a string,
+    and we want it to remain a number in case we need
+    to do any math w/ the total in the future*/
+    totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
 }
 
 
