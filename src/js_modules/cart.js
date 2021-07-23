@@ -8,8 +8,10 @@ let totalCostEl = document.querySelector(".total-price");
 let cartNavbarAmt = document.querySelector(".navbar__item-cart__amt");
 const cartItemsEl = document.querySelector(".cart__contents").children[0];
 
-
 const productContentEl = document.querySelector(".product-content");
+
+
+
 
 
 // variables
@@ -18,6 +20,11 @@ let totalNavbarAmt = 0;
 let cart = [];
 let productDataToCart = {};
 
+
+
+
+
+// add to cart event listener
 productContentEl.addEventListener("click", event => {
     let closestBtn = event.target.closest("button");
     let ItemCartClassCheck = closestBtn.classList.contains("item__add-to-cart");
@@ -32,87 +39,176 @@ productContentEl.addEventListener("click", event => {
         let data = {itemId, itemName, itemPrice, itemImg, amountOfItem:1};
         productDataToCart = data;
     }
+    // send the data to the cart array
     cart.push(productDataToCart);
 
 
 
-
-    const removeDuplicates = (arrayToFilter, propToFilterBy) => {
-        // Declare a new array
-        let newArray = [];
-
-        // Declare an empty object
-        let uniqueObject = {};
-
-        // Loop for the array elements
-        for (var i in arrayToFilter) {
-            // Extract the title
-            let objTitle = arrayToFilter[i][propToFilterBy];
-
-            // Use the title as the index
-            uniqueObject[objTitle] = arrayToFilter[i];
-        }
-
-        // Loop to push unique object into array
-        for (i in uniqueObject) {
-            newArray.push(uniqueObject[i]);
-        }
-
-        // Display the unique objects
-        // console.log(newArray);
-        cart = newArray;
-    }
-
-
-    const renderCart = _ => {
-        let cartMarkup = "";
-        // render the cart data into the cart
-        cart.forEach(cartItem => {
-            const {amountOfItem, itemId, itemName, itemImg, itemPrice} = cartItem;
-            // console.log(itemName)
-
-            let markup = `
-            <li class="cart-item" data-productId="${itemId}">
-                <button class="delete-cart-item-btn">
-                    <span>&times;</span>
-                </button>
-                <img src="${itemImg}" alt="${itemName}">
-                <div class="cart-item__info">
-                    <h3>${itemName}</h3>
-                    <div>${itemPrice}</div>
-                </div>
-                <div class="amount-container">
-                    <button class="cart-amt-btn cart-amt-btn__decrease"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                    <div class="amount-container__amt">${amountOfItem}</div>
-                    <button class="cart-amt-btn cart-amt-btn__increase"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
-                </div>
-            </li>
-            `
-            cartMarkup += markup;
-        });
-        cartItemsEl.innerHTML = cartMarkup;
-
-        // nodelist[currentItem].itemName
-        // console.log(document.querySelectorAll(".cart-item")[0].children[2].children[0].innerHTML)
-
-    }
-
-
     const setCart = _ => {
         removeDuplicates(cart, "itemName")
-
         renderCart()
     }
 
+    const render = _ => {
+        setCart()
+        calculateCartTotal()
+        updateCartAmtNavbar()
+    }
 
-    // render
-    setCart()
-    calculateCartTotal()
-    updateCartAmtNavbar()
-
-    increaseDecreaseCartBtnFunctionality()
+    render()
 });
 
+
+
+// cart event listener
+document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
+    let btn = event.target.closest("button");
+    let productId = Number(event.target.parentElement.parentElement.parentElement.getAttribute("data-productId"));
+
+
+
+    const increaseBtn =_ => {
+        if(btn.classList.contains("cart-amt-btn__increase")) {
+            cart.forEach((currentProduct) => {
+                if(productId === currentProduct.itemId) {
+                    currentProduct.amountOfItem++;
+                    renderCart()
+                    calculateCartTotal()
+                }
+            });
+        }
+    }
+
+
+
+    const decreaseBtn = _ => {
+        if(btn.classList.contains("cart-amt-btn__decrease")) {
+            cart.forEach((currentProduct) => {
+                if(productId === currentProduct.itemId) {
+                    if(currentProduct.amountOfItem <= 1) {
+                        deleteCartItemBtn()
+                        renderCart()
+                        calculateCartTotal()
+                    } else {
+                        currentProduct.amountOfItem--;
+                        renderCart()
+                        calculateCartTotal()
+                    }
+                }
+            });
+        }
+    }
+
+
+    const deleteCartItemBtn = () => {
+        if(btn.classList.contains("delete-cart-item-btn")) {
+            const currentId = Number(event.target.parentElement.parentElement.getAttribute("data-productId")) -1;
+
+            const render = _ => {
+                renderCart()
+                calculateCartTotal()
+                updateCartAmtNavbar()
+            }
+
+            const removeItem = _ => {
+                cart.splice(currentId, 1);
+            }
+
+            // need to get the specific id your clicking on
+            cart.forEach((currentProduct) => {
+                if(currentId === (currentProduct.itemId)) {
+                    removeItem()
+                    render()
+                }
+            });
+        }
+        // console.log("delete me now")
+    }
+
+    const deleteAction = _ => {
+
+    }
+
+
+
+    const render = _ => {
+        increaseBtn();
+        decreaseBtn();
+        deleteCartItemBtn()
+    }
+
+    render()
+
+    
+});
+
+
+
+
+
+
+
+
+const removeDuplicates = (arrayToFilter, propToFilterBy) => {
+    // Declare a new array
+    let newArray = [];
+
+    // Declare an empty object
+    let uniqueObject = {};
+
+    // Loop for the array elements
+    for (var i in arrayToFilter) {
+        // Extract the title
+        let objTitle = arrayToFilter[i][propToFilterBy];
+
+        // Use the title as the index
+        uniqueObject[objTitle] = arrayToFilter[i];
+    }
+
+    // Loop to push unique object into array
+    for (i in uniqueObject) {
+        newArray.push(uniqueObject[i]);
+    }
+
+    // Display the unique objects
+    // console.log(newArray);
+    cart = newArray;
+}
+
+
+
+const renderCart = _ => {
+    let cartMarkup = "";
+    // render the cart data into the cart
+    cart.forEach(cartItem => {
+        const {amountOfItem, itemId, itemName, itemImg, itemPrice} = cartItem;
+        // console.log(itemName)
+
+        let markup = `
+        <li class="cart-item" data-productId="${itemId}">
+            <button class="delete-cart-item-btn">
+                <span>&times;</span>
+            </button>
+            <img src="${itemImg}" alt="${itemName}">
+            <div class="cart-item__info">
+                <h3>${itemName}</h3>
+                <div>${itemPrice}</div>
+            </div>
+            <div class="amount-container">
+                <button class="cart-amt-btn cart-amt-btn__decrease"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                <div class="amount-container__amt">${amountOfItem}</div>
+                <button class="cart-amt-btn cart-amt-btn__increase"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+            </div>
+        </li>
+        `
+        cartMarkup += markup;
+    });
+    cartItemsEl.innerHTML = cartMarkup;
+
+    // nodelist[currentItem].itemName
+    // console.log(document.querySelectorAll(".cart-item")[0].children[2].children[0].innerHTML)
+
+}
 
 
 
@@ -144,6 +240,7 @@ const updateCartAmtNavbar = _ => {
 }
 
 
+
 const calculateCartTotal = _ => {
     // get all the prices & amt
     // console.log(Array.from(document.querySelectorAll(".cart-item")))
@@ -160,6 +257,9 @@ const calculateCartTotal = _ => {
     to do any math w/ the total in the future*/
     totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
 }
+
+
+
 const deleteCartItemFunctionality = _ => {
     // 1. get the current item, current price & current amt
     // 2. (get current price * current amt) & minus this from the total
@@ -177,13 +277,16 @@ const deleteCartItemFunctionality = _ => {
 
         if(btn.classList.contains("delete-cart-item-btn")) {
             // decrease total amt
-            totalCostEl.innerHTML = `$${((productTotalAmt - totalCost).toFixed(2))}`;
+            totalCostEl.innerHTML = `$${((totalCost - productTotalAmt).toFixed(2))}`;
             // remove from cart
             cart.forEach((currentProduct) => {
                 if(productId == currentProduct.itemId) {
+                    // remove the correct item
                     currentProduct.splice(productId, 1);
-                    // recalculate the total amount
-                    calculateCartTotal()
+                    currentProduct.remove()
+
+                    // re render the cart
+                    renderCart()
                 }
             });
             console.log()
@@ -192,9 +295,6 @@ const deleteCartItemFunctionality = _ => {
 
 
 }
-
-
-deleteCartItemFunctionality()
 
 
 // console.log(document.querySelectorAll(".cart__contents")[0].children[0])
