@@ -86,7 +86,7 @@ document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("cl
             cart.forEach((currentProduct) => {
                 if(productId === currentProduct.itemId) {
                     if(currentProduct.amountOfItem <= 1) {
-                        deleteCartItemBtn()
+                        removeCartItem(event.target.parentElement.parentElement.parentElement.children[2].children[0].innerHTML)
                         renderCart()
                         calculateCartTotal()
                     } else {
@@ -102,49 +102,48 @@ document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("cl
 
     const deleteCartItemBtn = () => {
         if(btn.classList.contains("delete-cart-item-btn")) {
-            const currentId = Number(event.target.parentElement.parentElement.getAttribute("data-productId")) -1;
-
-            const render = _ => {
-                renderCart()
-                calculateCartTotal()
-                updateCartAmtNavbar()
-            }
-
-            const removeItem = _ => {
-                cart.splice(currentId, 1);
-            }
-
-            // need to get the specific id your clicking on
-            cart.forEach((currentProduct) => {
-                if(currentId === (currentProduct.itemId)) {
-                    removeItem()
-                    render()
-                }
-            });
+            removeCartItem(event.target.parentElement.parentElement.children[2].children[0].innerHTML)
         }
-        // console.log("delete me now")
     }
 
-    const deleteAction = _ => {
-
-    }
-
-
-
-    const render = _ => {
+    const renderTheCart = _ => {
         increaseBtn();
         decreaseBtn();
         deleteCartItemBtn()
     }
 
-    render()
+    renderTheCart()
 
-    
 });
 
 
 
+const removeCartItem = (currentProductTitleLocation) => {
 
+    const renderTheCart = _ => {
+        renderCart()
+        calculateCartTotal()
+        updateCartAmtNavbar()
+    }
+
+    // get the title of the current li
+    let currentProductTitle = currentProductTitleLocation;
+    let currentProductIndex = 0;
+
+    // find this li in the cart array
+    cart.filter(item => {
+        if(item.itemName === currentProductTitle) {
+            // get the items index
+            currentProductIndex = cart.indexOf(item)
+
+            // use the index of the item to remove it
+            cart.splice(currentProductIndex, 1)
+
+            // re-render the cart
+            renderTheCart()
+        }
+    });
+}
 
 
 
@@ -248,7 +247,7 @@ const calculateCartTotal = _ => {
         // price * amount
         item.children[2].children[1].innerHTML.slice(1) * item.children[3].children[1].innerHTML);
 
-    let totalAmt = nums.reduce((prev, curr) => prev + curr);
+    let totalAmt = nums.reduce((prev, curr) => prev + curr, 0);
 
     // render the total cost to the DOM
     totalCost = totalAmt;
@@ -256,84 +255,6 @@ const calculateCartTotal = _ => {
     and we want it to remain a number in case we need
     to do any math w/ the total in the future*/
     totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
-}
-
-
-
-const deleteCartItemFunctionality = _ => {
-    // 1. get the current item, current price & current amt
-    // 2. (get current price * current amt) & minus this from the total
-    // 3. remove item from cart array & remove it from the DOM
-
-    // console.log(Array.from(document.querySelectorAll(".cart-item")))
-    // console.log(event.target)
-
-    document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
-        let btn = event.target.closest("button");
-        let productId = event.target.parentElement.parentElement.parentElement.getAttribute("data-productId");
-        let productCost = Number(event.target.parentElement.parentElement.children[2].children[1].innerHTML.slice(1));
-        let productAmt = Number(event.target.parentElement.parentElement.children[3].children[1].innerHTML);
-        let productTotalAmt = productCost * productAmt;
-
-        if(btn.classList.contains("delete-cart-item-btn")) {
-            // decrease total amt
-            totalCostEl.innerHTML = `$${((totalCost - productTotalAmt).toFixed(2))}`;
-            // remove from cart
-            cart.forEach((currentProduct) => {
-                if(productId == currentProduct.itemId) {
-                    // remove the correct item
-                    currentProduct.splice(productId, 1);
-                    currentProduct.remove()
-
-                    // re render the cart
-                    renderCart()
-                }
-            });
-            console.log()
-        }
-    });
-
-
-}
-
-
-// console.log(document.querySelectorAll(".cart__contents")[0].children[0])
-
-
-const increaseDecreaseCartBtnFunctionality = _ => {
-    // console.log(document.querySelectorAll(".cart__contents")[0].children[0])
-    // cart contents
-    document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
-        let btn = event.target.closest("button");
-        let productId = event.target.parentElement.parentElement.parentElement.getAttribute("data-productId");
-
-        // decrease button
-        if(btn.classList.contains("cart-amt-btn__decrease")) {
-            cart.forEach((currentProduct) => {
-                if(productId == currentProduct.itemId) {
-                    if(currentProduct.amountOfItem <= 1) {
-                        // deleteCartItemFunctionality()
-                        calculateCartTotal()
-                    } else {
-                        currentProduct.amountOfItem--;
-                        // recalculate the total amount
-                        calculateCartTotal()
-                    }
-                }
-            });
-        }
-
-        // increase button
-        if(btn.classList.contains("cart-amt-btn__increase")) {
-            cart.forEach((currentProduct) => {
-                if(productId == currentProduct.itemId) {
-                    currentProduct.amountOfItem++;
-                    // recalculate the total amount
-                    calculateCartTotal()
-                }
-            });
-        }
-    })
 }
 
 
