@@ -7,7 +7,6 @@ const closeCartBtnEl = document.querySelector(".close-cart-btn");
 let totalCostEl = document.querySelector(".total-price");
 let cartNavbarAmt = document.querySelector(".navbar__item-cart__amt");
 const cartItemsEl = document.querySelector(".cart__contents").children[0];
-
 const productContentEl = document.querySelector(".product-content");
 
 
@@ -60,6 +59,8 @@ productContentEl.addEventListener("click", event => {
 
 
 
+
+
 // cart event listener
 document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("click", event => {
     let btn = event.target.closest("button");
@@ -100,11 +101,14 @@ document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("cl
     }
 
 
+
     const deleteCartItemBtn = () => {
         if(btn.classList.contains("delete-cart-item-btn")) {
             removeCartItem(event.target.parentElement.parentElement.children[2].children[0].innerHTML)
         }
     }
+
+
 
     const renderTheCart = _ => {
         increaseBtn();
@@ -113,13 +117,14 @@ document.querySelectorAll(".cart__contents")[0].children[0].addEventListener("cl
     }
 
     renderTheCart()
-
 });
 
 
 
-const removeCartItem = (currentProductTitleLocation) => {
 
+
+// functions
+const removeCartItem = (currentProductTitleLocation) => {
     const renderTheCart = _ => {
         renderCart()
         calculateCartTotal()
@@ -147,7 +152,6 @@ const removeCartItem = (currentProductTitleLocation) => {
 
 
 
-
 const removeDuplicates = (arrayToFilter, propToFilterBy) => {
     // Declare a new array
     let newArray = [];
@@ -168,9 +172,7 @@ const removeDuplicates = (arrayToFilter, propToFilterBy) => {
     for (i in uniqueObject) {
         newArray.push(uniqueObject[i]);
     }
-
-    // Display the unique objects
-    // console.log(newArray);
+    // update the cart to be the non duplicated array
     cart = newArray;
 }
 
@@ -181,7 +183,6 @@ const renderCart = _ => {
     // render the cart data into the cart
     cart.forEach(cartItem => {
         const {amountOfItem, itemId, itemName, itemImg, itemPrice} = cartItem;
-        // console.log(itemName)
 
         let markup = `
         <li class="cart-item" data-productId="${itemId}">
@@ -202,11 +203,8 @@ const renderCart = _ => {
         `
         cartMarkup += markup;
     });
+    // set the markup
     cartItemsEl.innerHTML = cartMarkup;
-
-    // nodelist[currentItem].itemName
-    // console.log(document.querySelectorAll(".cart-item")[0].children[2].children[0].innerHTML)
-
 }
 
 
@@ -216,6 +214,8 @@ const openCart = _ => {
     cartContainer.classList.add("cart-container--active");
     cartEl.classList.add("cart--active");
 }
+
+
 
 const closeCart = _ => {
     document.body.classList.remove("cart--open");
@@ -233,6 +233,7 @@ const updateCart = (cartData) => {
 }
 
 
+
 const updateCartAmtNavbar = _ => {
     totalNavbarAmt = document.querySelectorAll(".cart-item").length;
     cartNavbarAmt.innerHTML = totalNavbarAmt;
@@ -242,7 +243,6 @@ const updateCartAmtNavbar = _ => {
 
 const calculateCartTotal = _ => {
     // get all the prices & amt
-    // console.log(Array.from(document.querySelectorAll(".cart-item")))
     let nums = Array.from(document.querySelectorAll(".cart-item")).map(item =>
         // price * amount
         item.children[2].children[1].innerHTML.slice(1) * item.children[3].children[1].innerHTML);
@@ -256,7 +256,6 @@ const calculateCartTotal = _ => {
     to do any math w/ the total in the future*/
     totalCostEl.innerHTML = `$${(totalCost.toFixed(2))}`;
 }
-
 
 
 
@@ -276,8 +275,6 @@ export const cartModule = _ => {
         cartContainer.style.top = `${window.pageYOffset}px`;
     }
     window.addEventListener("scroll", runOnScroll, {passive:true});
-
-
 
     updateCart()
 }

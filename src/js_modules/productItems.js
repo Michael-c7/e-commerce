@@ -6,7 +6,7 @@ export const productItem = async _ => {
 }
 
 
-const productItemData = async _ => {
+export const productItemData = async _ => {
     let endPoint = "https://fakestoreapi.com/products";
 
     try {
@@ -22,13 +22,6 @@ const productItemData = async _ => {
 
 const productItemDataRender = async _ => {
     const productData = await productItemData();
-    let productDataFilter = productData.filter(product => {
-        const { title } = product;
-        // case sensitive
-        if(title.toLowerCase().split(" ").includes("mens")) {
-            // console.log(title)
-        }
-    });
 
     let myMarkup = "";
 
@@ -60,22 +53,3 @@ const productItemDataRender = async _ => {
 const render = _ => {
     productItemDataRender()
 }
-
-
-
-
-/*
-<li class="product-content__item">
-    <img class="content__item__img" src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="item image">
-    <div class="product-content__item__info">
-        <h2 class="item-name">Blue bag</h2>
-        <h3 class="item-price">$222</h3>
-    </div>
-    <p class="product-content__description">
-        Lorem ipsum dolor sit amet consectetur,
-        adipisicing elit. Obcaecati voluptas odit iste laboriosam.
-        aboriosam rem asperiores minima laudantium dolore ipsum.
-    </p>
-    <button class="item__add-to-cart">Add to Cart</button>
-</li>
-*/
