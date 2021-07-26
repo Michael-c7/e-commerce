@@ -1,6 +1,4 @@
 import { productItem, productItemData } from "./productItems";
-// import { filterItem } from "./filterItems";
-import { changeSliderImg } from "./imageSlider";
 
 const searchBarEl = document.querySelector(".search-bar");
 const searchBarBtnEl = document.querySelector(".search-bar__submit");
@@ -14,29 +12,17 @@ let filteredSearchData = [];
 
 export const searchProducts = _ => {
     console.log("the search module");
-    productItem()
-    // filterItem()
 
-    changeSliderImg()
+    bindSearch()
 }
-
-
-
-
 
 const getUserInput = _ => {
-    searchBarBtnEl.addEventListener("click", event => {
-        event.preventDefault();
-        if(searchBarInputEl === "") return;
-        userInput = searchBarInputEl.value.toLowerCase();
-        console.log(userInput)
-
-        filterSearch(userInput);
-        renderFilteredData();
-    });
+    if(searchBarInputEl === "") return;
+    userInput = searchBarInputEl.value.toLowerCase();
+    // console.log(userInput)
 }
 
-getUserInput()
+
 
 
 const filterSearch = async (userInput) => {
@@ -46,10 +32,12 @@ const filterSearch = async (userInput) => {
         // case sensitive
         if(title.toLowerCase().split(" ").includes(userInput)) {
             filteredSearchData.push(product);
-            console.log(filteredSearchData)
+            // console.log(filteredSearchData)
         }
     });
 }
+
+
 
 const renderFilteredData = _ => {
     let myMarkup = "";
@@ -58,6 +46,8 @@ const renderFilteredData = _ => {
         const { id, category, description, image, price, title } = item;
         // max characters 155 or max words 20
         let amtOfLettersToKeep = 155;
+        /* regex at the end of the shortenedDescription
+        gets rid of white space at the end of the paragraph*/
         let shortenedDescription = description.substring(0, amtOfLettersToKeep).replace(/\s*$/,"") + "...";
 
         let markup = `
@@ -77,6 +67,20 @@ const renderFilteredData = _ => {
     });
     productContentEl.innerHTML = myMarkup;
 }
+
+
+
+const bindSearch = _ => {
+    searchBarEl.addEventListener("submit", event => {
+        event.preventDefault();
+        getUserInput()
+        filterSearch(userInput);
+        renderFilteredData();
+    });
+}
+
+
+
 
 
 

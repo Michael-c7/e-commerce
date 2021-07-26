@@ -1,8 +1,8 @@
 import './style.scss';
-import sliderImg0 from "./images/slider-img-electronics-0.jpg";
-import {toggleMobileNavMenu } from "./js_modules/toggleMobileNav";
 import { searchProducts } from "./js_modules/search";
 import { cartModule } from "./js_modules/cart";
+import { productItem } from "../src/js_modules/productItems";
+import { changeSliderImg } from "../src/js_modules/imageSlider";
 
 /*
 w/ webpack have to add image w/ js | or css
@@ -19,9 +19,10 @@ https://apilist.fun/category/ecommerce
 */
 
 const render = _ => {
-    // productItem()
-    searchProducts()
+    changeSliderImg()
     cartModule()
+    productItem()
+    searchProducts()
 }
 
 render()
@@ -47,30 +48,22 @@ let test = async _ => {
 
 
 
-// img slider
-let imgSliderEl = document.querySelector(".slider__img");
-// imgSliderEl.style.src = sliderImg0;
-
-
-
-// toggle filter open
-// const navbarToggleBtnEl = document.querySelector(".navbar__toggle-btn");
 
 
 
 /*TODO LIST
-1. add the data from the fake store api
+1. add the data from the fake store api [X]
 - https://fakestoreapi.com/docs
 
 2. get search functionality working
 
-3. create a working slidershow
-    - auto / timed scroll
-    - can scroll(based of index) / fade scroll
+3. create a working slidershow [X]
+    - auto / timed scroll [X]
+    - can scroll(based of index) / fade scroll [X]
 
-4. add to cart
+4. add to cart [X]
 
-5. cart functionality
+5. cart functionality [X]
 
 6. filter products functionality
 */
