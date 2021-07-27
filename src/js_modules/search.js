@@ -12,14 +12,25 @@ let filteredSearchData = [];
 
 export const searchProducts = _ => {
     console.log("the search module");
-
-    bindSearch()
+    searchData()
 }
 
 const getUserInput = _ => {
     if(searchBarInputEl === "") return;
     userInput = searchBarInputEl.value.toLowerCase();
-    // console.log(userInput)
+
+}
+
+
+
+
+
+const searchData = _ => {
+    searchBarEl.addEventListener("submit", event => {
+        event.preventDefault();
+        getUserInput()
+        filterSearch(userInput)
+    });
 }
 
 
@@ -27,22 +38,23 @@ const getUserInput = _ => {
 
 const filterSearch = async (userInput) => {
     const productData = await productItemData();
-    let productDataFilter = productData.filter(product => {
-        const { title } = product;
-        // case sensitive
-        if(title.toLowerCase().split(" ").includes(userInput)) {
-            filteredSearchData.push(product);
-            // console.log(filteredSearchData)
-        }
-    });
-}
-
-
-
-const renderFilteredData = _ => {
+    let filteredDataArr = [];
     let myMarkup = "";
 
-    filteredSearchData.forEach((item, index) => {
+    const filterProdcutData = productData.map(item => {
+        const { category, title } = item;
+        if(title.toLowerCase().split(" ").includes(userInput)) {
+            filteredDataArr.push(item)
+        }
+
+        if(userInput === "") {
+            filteredDataArr.push(item)
+        }
+    });
+
+
+
+    filteredDataArr.forEach(item => {
         const { id, category, description, image, price, title } = item;
         // max characters 155 or max words 20
         let amtOfLettersToKeep = 155;
@@ -65,36 +77,14 @@ const renderFilteredData = _ => {
         `
         myMarkup += markup;
     });
-    productContentEl.innerHTML = myMarkup;
+
+    if(filteredDataArr.length === 0) {
+        productContentEl.innerHTML = `<div class="no-results-found">
+        <span>No results found.</span>
+        <div class="more-txt">Enter an empty result or refresh the page to reset the data.</div>
+        </div>`
+    } else {
+        productContentEl.innerHTML = myMarkup;
+    }
+
 }
-
-
-
-const bindSearch = _ => {
-    searchBarEl.addEventListener("submit", event => {
-        event.preventDefault();
-        getUserInput()
-        filterSearch(userInput);
-        renderFilteredData();
-    });
-}
-
-
-
-
-
-
-/*
-1. get the data from productItems module [X]
-
-2. get the user input from the search field [X]
-
-3. when you hit enter / submit the search query [x]
-
-4. filter through the productItem data's title [x]
-    to find only items that match the search query
-
-5.  send the filter data back to the productItems module
-
-6. update the DOM w/ the filter data in the productItems module
-*/

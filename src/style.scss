@@ -626,3 +626,27 @@ red : #eb3b5a
         height: 90%;
     }
 }
+
+
+
+
+
+
+
+
+
+/*no results found text*/
+.no-results-found {
+    font-size:1.5rem;
+    letter-spacing: 0.125px;
+    text-align: center;
+    width:18ch;
+    margin:1.75rem auto 0 auto;
+    font-weight: bold;
+
+    .more-txt {
+        margin-top:0.25rem;
+        font-weight: normal;
+
+    }
+}
