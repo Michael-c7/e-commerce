@@ -22,7 +22,7 @@ export const productItemData = async _ => {
 
 
 
-const productItemDataRender = async _ => {
+export const productItemDataRender = async _ => {
     const productData = await productItemData();
 
     let myMarkup = "";

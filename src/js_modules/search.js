@@ -1,4 +1,4 @@
-import { productItem, productItemData } from "./productItems";
+import { productItem, productItemData, productItemDataRender } from "./productItems";
 
 const searchBarEl = document.querySelector(".search-bar");
 const searchBarBtnEl = document.querySelector(".search-bar__submit");
@@ -43,13 +43,15 @@ const filterSearch = async (userInput) => {
 
     const filterProdcutData = productData.map(item => {
         const { category, title } = item;
-        if(title.toLowerCase().split(" ").includes(userInput)) {
-            filteredDataArr.push(item)
-        }
 
-        if(userInput === "") {
-            filteredDataArr.push(item)
-        }
+        if(userInput === "")  return;
+
+        let splitToWord = title.toLowerCase().split(" ");
+        let splitToLetter = splitToWord.map(letter => {
+            if(letter.toLowerCase().includes(userInput)) {
+                    filteredDataArr.push(item)
+                }
+        });
     });
 
 
@@ -79,9 +81,10 @@ const filterSearch = async (userInput) => {
     });
 
     if(filteredDataArr.length === 0) {
-        productContentEl.innerHTML = `<div class="no-results-found">
-        <span>No results found.</span>
-        <div class="more-txt">Enter an empty result or refresh the page to reset the data.</div>
+        productContentEl.innerHTML = `
+        <div class="no-results-found">
+            <span>No results found.</span>
+            <div onclick="${productItemDataRender()}">Refreshing</div>
         </div>`
     } else {
         productContentEl.innerHTML = myMarkup;

@@ -636,17 +636,28 @@ red : #eb3b5a
 
 
 /*no results found text*/
+
+
 .no-results-found {
-    font-size:1.5rem;
+    position: absolute;
     letter-spacing: 0.125px;
     text-align: center;
-    width:18ch;
+    width:26ch;
     margin:1.75rem auto 0 auto;
     font-weight: bold;
+    font-size:1.5rem;
 
-    .more-txt {
-        margin-top:0.25rem;
-        font-weight: normal;
+    left:50%;
+    transform: translateX(-50%);
+}
 
-    }
+.refresh-btn {
+    border:none;
+    border-radius: 2px;
+    background:var(--main-blue);
+    color:#fff;
+    padding:0.5rem 1rem;
+    display:block;
+    font-size:1.25rem;
+    margin:1.75rem auto 0 auto;
 }
