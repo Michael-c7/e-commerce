@@ -168,69 +168,10 @@ red : #eb3b5a
 .app__body {
     position: relative;
     display:grid;
-    grid-template-columns: 150px minmax(400px, 800px);
+    grid-template-columns: minmax(400px, 1000px);
     padding:1.75rem 1rem 0rem 1rem;
     justify-content: center;
 }
-
-.filter-content {
-    color:#222;
-    position: sticky;
-    top:5.5rem;
-    height:500px;
-    // background:rgba(0, 0, 255, 0.137);
-}
-
-.filter-content__filter {
-    transition: max-height 0.4s;
-    overflow: hidden;
-    // max-height: 0;
-}
-
-.filter-content__filter--active {
-    // max-height: var(--max-height);
-}
-
-.filter-content__clear-filter {
-    font-size:1rem;
-}
-
-.filter-content__clear-filter:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.filter-content__btn {
-    position: relative;
-    display:flex;
-    align-items:center;
-
-    i {
-        position: relative;
-        top:3px;
-        margin-right:0.25rem;
-    }
-}
-
-.filter-content__heading {
-    margin-top:0.75rem;
-    font-weight: 400;
-    font-size:1.25rem;
-}
-
-.filter-content__form {
-    display:flex;
-    flex-direction: column;
-
-    > * {
-        margin:0.25rem 0 0 1rem;
-    }
-
-    > *:first-of-type {
-        margin-top:0.25rem;
-    }
-}
-
 
 
 
@@ -240,8 +181,6 @@ red : #eb3b5a
 
 .body__main-content__inner {
     position: relative;
-    // display:grid;
-    // grid-template-rows: 1fr fr;
     background:rgba(255, 0, 0, 0.349);
 }
 
@@ -250,8 +189,6 @@ red : #eb3b5a
 .slider {
     position: relative;
     height:350px;
-    // background:rgba(255, 0, 0, 0.349);
-    // overflow:hidden;
 }
 
 
@@ -322,13 +259,13 @@ red : #eb3b5a
     margin:1rem;
 }
 
-.product-content__item:nth-of-type(1) {
-    margin-left:0;
-}
+// .product-content__item:nth-of-type(1) {
+//     margin-left:0;
+// }
 
-.product-content__item:nth-of-type(2) {
-    margin-right:0;
-}
+// .product-content__item:nth-of-type(2) {
+//     margin-right:0;
+// }
 
 .product-content__item__info {
     display:flex;
@@ -403,8 +340,6 @@ red : #eb3b5a
 
     .body__main-content__inner {
         position: relative;
-        // display:grid;
-        // grid-template-rows: 1fr 150fr;
     }
 }
 
@@ -535,7 +470,6 @@ red : #eb3b5a
 
         .cart-item__info {
             margin:0 1rem;
-            // display:flex;
         }
 
         .amount-container {
@@ -636,8 +570,6 @@ red : #eb3b5a
 
 
 /*no results found text*/
-
-
 .no-results-found {
     position: absolute;
     letter-spacing: 0.125px;

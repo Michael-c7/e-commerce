@@ -1,3 +1,6 @@
+import { localProducts } from "./localProductData";
+
+
 const productContentEl = document.querySelector(".product-content");
 
 export const productItem = async _ => {
@@ -16,7 +19,7 @@ export const productItemData = async _ => {
     } catch(err) {
         console.log(err);
         alert("going to use the local data, because the api cant be reached.");
-        // return the local test data(yet to make)
+        return localProducts;
     }
 }
 
