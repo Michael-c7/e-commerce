@@ -1,5 +1,3 @@
-# e-commerce
-
 ![](https://media.giphy.com/media/lOsJZewavaht2dIcNp/giphy.gif)
 
 ### Tools used
